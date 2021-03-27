@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light min-h-screen">
+  <div class="bg-light min-h-screen overflow-hidden">
     <Header />
     <Nuxt />
   </div>

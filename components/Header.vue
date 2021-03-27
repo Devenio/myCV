@@ -1,5 +1,5 @@
 <template>
-    <div class="h-16 w-full px-5 flex justify-between items-center">
+    <div class="h-16 container mx-auto px-5 flex justify-between items-center">
         <div class="font-bold text-xl text-gray-900">
             Nima<span class="text-red-600">Shahbazi</span>
         </div>
@@ -18,7 +18,7 @@
             :class="modalClose ? 'hidden' : 'flex'"
         >
             <div 
-                class="bg-gray-900 opacity-50 w-full h-screen absolute top-0"
+                class="bg-gray-900 opacity-75 w-full h-screen absolute top-0"
                 @click="modalClose = !modalClose"
             ></div>
             <div class="w-11/12 min-h-64 bg-white absolute z-50 opacity-100 rounded">
