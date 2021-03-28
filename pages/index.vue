@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-5">
+    <div class="container mx-auto px-5 bg-white shadow-xl p-5">
         <div
             class="sm:flex sm:flex-row-reverse md:justify-center lg:justify-around"
         >
@@ -131,12 +131,12 @@
             skills
         </h2>
         <div
-            class="w-full mt-5 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-scroll justify-center sm:justify-start lg:justify-center"
+            class="w-full mt-5 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-auto justify-center sm:justify-start lg:justify-center"
         >
             <div
                 v-for="skill in skills"
                 :key="skill.id"
-                class="mx-5 sm:mt-5 sm:flex sm:flex-col sm:items-start"
+                class="mx-5 sm:mt-5 sm:flex sm:flex-col sm:items-start lg:shadow-xl"
             >
                 <button-samp
                     :text="skill.title"
@@ -144,8 +144,8 @@
                     :isButton="false"
                 />
                 <div
-                    class="flex flex-col rounded-lg shadow-lg items-centerd px-5 py-3 mt-5 sm:mt-0 sm:border-0 mx-auto bg-white border-2 border-gray-300"
-                    style="width:250px;"
+                    class="flex flex-col rounded-lg shadow-xl items-centerd px-5 py-3 mt-5 sm:mt-0 sm:border-0 mx-auto border-2 border-gray-300 h-full"
+                    style="width:250px;background-color: #f2f2f2;"
                 >
                     <div
                         class="w-full flex items-center mt-3 justify-between"
@@ -167,7 +167,7 @@
 
         <div class="w-full py-5">
             <div
-                class="w-full py-2 rounded-full bg-white flex items-center justify-between px-5 shadow-lg lg:w-3/4 lg:mx-auto"
+                class="w-full py-3 rounded-full bg-gray-200 flex items-center justify-between px-5 shadow-lg lg:w-3/4 lg:mx-auto"
             >
                 <p class="text-gray-900">
                     <strong>Language</strong>: English, Persian (Vernacular)
@@ -176,7 +176,7 @@
             </div>
         </div>
 
-        <div class="text-center mt-5 px-5 sm:text-left lg:flex lg:justify-between items-start">
+        <div class="text-center mt-5 px-5 sm:text-left lg:flex lg:justify-between items-start divide-x-4">
             <div class="lg:w-1/2">
                 <p class="capitalize text-lg text-gray-900">
                     your feedbacks, suggestions, comments or every other
@@ -192,7 +192,7 @@
                         <input
                             type="text"
                             id="name"
-                            class="w-full sm:w-5/6 h-10 border-2 border-gray-300 shadow-md bg-white mt-2 rounded-lg px-5 py-2"
+                            class="w-full sm:w-5/6 h-10 border-2 shadow-md bg-white mt-2 rounded-lg px-5 py-2 border-gray-500 focus:border-blue-600"
                             placeholder="Enter your name here"
                             autocomplete="off"
                         />
@@ -204,7 +204,7 @@
                         <input
                             type="text"
                             id="email"
-                            class="w-full sm:w-5/6 h-10 border-2 border-gray-300 shadow-md bg-white mt-2 rounded-lg px-5 py-2"
+                            class="w-full sm:w-5/6 h-10 border-2 border-gray-500 shadow-md bg-white mt-2 rounded-lg px-5 py-2 focus:border-blue-600"
                             placeholder="Enter your email"
                             autocomplete="off"
                         />
@@ -216,7 +216,7 @@
                         <textarea
                             type="text"
                             id="message"
-                            class="w-full sm:w-5/6 resize-y  h-10 border-2 border-gray-300 shadow-md bg-white mt-2 rounded-lg px-5 py-2"
+                            class="w-full sm:w-5/6 resize-y  h-10 border-2 shadow-md bg-white mt-2 rounded-lg px-5 py-2 border-gray-500 focus:border-blue-600"
                             placeholder="Enter your email"
                             autocomplete="off"
                             style="min-height: 200px;max-height: 350px;"
@@ -235,7 +235,7 @@
                     you can also find me in
                 </h2>
                 <div
-                    class="w-full pt-5 sm:flex sm:flex-col sm:flex-wrap sm:h-56 lg:h-full lg:mx-auto lg:w-full"
+                    class="w-full pt-5 sm:flex sm:flex-col sm:flex-wrap sm:h-56 lg:h-full lg:mx-auto lg:w-full lg:pl-5"
                 >
                     <div
                         class="w-full sm:w-1/2 flex items-center justify-evenly sm:justify-start mt-3 lg:w-full"

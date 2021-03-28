@@ -1,16 +1,16 @@
 <template>
-    <div class="h-16 container mx-auto px-5 flex justify-between items-center">
-        <div class="font-bold text-xl text-gray-900">
+    <div class="h-16 container mx-auto px-5 flex justify-between items-center bg-gray-800">
+        <div class="font-bold text-xl text-white">
             Nima<span class="text-red-600">Shahbazi</span>
         </div>
-        <ul class="sm:flex w-48 h-full bg-purple justify-evenly hidden">
+        <ul class="sm:flex w-48 h-full bg-purple justify-evenly hidden text-white">
             <li :class="liClass">Services</li>
             <li :class="liClass">Contact</li>
         </ul>
         <fa
             :icon="['fas', 'bars']"
             size="2x"
-            class="block cursor-pointer text-gray-900 sm:hidden"
+            class="block cursor-pointer text-white sm:hidden"
             @click="modalClose = !modalClose"
         ></fa>
         <div
@@ -36,7 +36,7 @@ export default {
     data() {
         return {
             liClass:
-                "flex flex-grow h-full justify-center items-center cursor-pointer hover:bg-gray-300",
+                "flex flex-grow h-full justify-center items-center cursor-pointer hover:bg-gray-700",
             modalClose: true
         };
     }
