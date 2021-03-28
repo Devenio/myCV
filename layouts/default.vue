@@ -1,16 +1,12 @@
 <template>
-    <div class="bg-light min-h-screen overflow-hidden">
-        <Header class="sticky top-0" />
+    <div class="bg-light min-h-screen overflow-x-hidden relative">
+        <Header />
         <Nuxt />
     </div>
 </template>
 
 <script>
-
-export default {
-    mounted() {
-    },
-};
+export default {};
 </script>
 
 <style></style>

@@ -85,17 +85,17 @@
             </div>
             <div class="sm:flex sm:flex-col sm:items-center lg:mr-5">
                 <fa
-                    class="text-gray-900 ml-1"
+                    class="text-gray-900 ml-1 cursor-pointer"
                     :icon="['fab', 'instagram']"
                     size="lg"
                 ></fa>
                 <fa
-                    class="text-gray-900 ml-1 sm:mt-2"
+                    class="text-gray-900 ml-1 sm:mt-2 cursor-pointer"
                     :icon="['fab', 'whatsapp']"
                     size="lg"
                 ></fa>
                 <fa
-                    class="text-gray-900 ml-1 sm:mt-2"
+                    class="text-gray-900 ml-1 sm:mt-2 cursor-pointer"
                     :icon="['fab', 'telegram-plane']"
                     size="lg"
                 ></fa>
