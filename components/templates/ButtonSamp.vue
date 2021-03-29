@@ -1,7 +1,10 @@
 <template>
-    <button :class="isButton ? buttonClass : titleClass">
+    <button :class="buttonClass" v-if="isButton">
         {{ text }}
     </button>
+    <div :class="titleClass" v-else>
+        {{ text }}
+    </div>
 </template>
 
 <script>
@@ -9,9 +12,9 @@ export default {
     data() {
         return {
             buttonClass:
-                "capitalize outline-none border-2 text-red-600 transition duration-200 border-red-600 py-1 px-6 mt-5 hover:bg-red-600 hover:text-white",
+                "capitalize outline-none border-2 text-red-600 font-semibold bg-white transition duration-200 border-red-600 py-1 px-6 mt-5 hover:bg-red-600 hover:text-white",
             titleClass:
-                "capitalize text-white outline-none border-2 border-red-600 py-1 px-6 shadow-xl"
+                "capitalize text-white outline-none border-2 border-red-600 py-1 px-6"
         };
     },
     props: {
@@ -24,4 +27,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

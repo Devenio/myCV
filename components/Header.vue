@@ -1,7 +1,7 @@
 <template>
     <div class="h-16 container mx-auto px-5 flex justify-between items-center bg-gray-800">
         <div class="font-bold text-xl text-white">
-            Nima<span class="text-red-600">Shahbazi</span>
+            Nima<span class="text-red-500">Shahbazi</span>
         </div>
         <ul class="sm:flex w-48 h-full bg-purple justify-evenly hidden text-white">
             <li :class="liClass">Services</li>

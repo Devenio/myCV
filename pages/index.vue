@@ -12,16 +12,19 @@
                         alt="Picture"
                         id="profile-pic"
                         class="relative z-10 shadow-2xl rounded-full w-64 h-64 mx-auto object-cover object-center sm:mr-0"
+                        loading="lazy"
                     />
                     <img
                         src="/svg/bg-effect.svg"
                         alt="backgroundEffect"
                         class="absolute svg-class1 sm:right-0"
+                        loading="lazy"
                     />
                     <img
                         src="/svg/bg-effect.svg"
                         alt="backgroundEffect"
                         class="absolute svg-class2"
+                        loading="lazy"
                     />
                 </div>
             </div>
@@ -118,10 +121,16 @@
                 A JavaScript full stak developer. (MEVN stack developer)
             </p>
             <div
-                class="w-full py-5 flex items-cneter justify-between sm:justify-start"
+                class="w-full py-5 flex items-cneter justify-center sm:justify-start relative"
             >
-                <button-samp text="see skills" class="sm:mr-5" />
-                <button-samp text="hire me" />
+                <button-samp text="see skills" class="mr-5 relative z-10" />
+                <button-samp text="hire me" class="relative z-10" />
+                <img
+                    src="/svg/circle.svg"
+                    alt="effect"
+                    loading="lazy"
+                    class="absolute left-28 z-0"
+                />
             </div>
         </div>
 
@@ -131,12 +140,12 @@
             skills
         </h2>
         <div
-            class="w-full mt-5 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-auto justify-center sm:justify-start lg:justify-center"
+            class="w-full py-10 sm:py-0 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-auto justify-center sm:justify-start lg:justify-center"
         >
             <div
                 v-for="skill in skills"
                 :key="skill.id"
-                class="mx-5 sm:mt-5 sm:flex sm:flex-col sm:items-start lg:shadow-xl"
+                class="mx-5 mb-16 sm:mb-0 sm:mt-5 sm:flex sm:flex-col sm:items-start "
             >
                 <button-samp
                     :text="skill.title"
@@ -144,7 +153,7 @@
                     :isButton="false"
                 />
                 <div
-                    class="flex flex-col rounded-lg shadow-xl items-centerd px-5 py-3 mt-5 sm:mt-0 sm:border-0 mx-auto border-2 border-gray-300 h-full"
+                    class="flex flex-col rounded-none items-centerd px-5 py-3 mt-2 sm:mt-0 mx-auto border-2 border-gray-400 h-full"
                     style="width:250px;background-color: #f2f2f2;"
                 >
                     <div
@@ -155,7 +164,11 @@
                         <p class="flex items-center text-gray-900 text-xl">
                             {{ skillItem }}
                         </p>
-                        <img src="/svg/tik.svg" class="w-9 h-9" />
+                        <img
+                            src="/svg/tik.svg"
+                            class="w-9 h-9"
+                            loading="lazy"
+                        />
                     </div>
                 </div>
                 <div
@@ -167,7 +180,8 @@
 
         <div class="w-full py-5">
             <div
-                class="w-full py-3 rounded-full bg-gray-200 flex items-center justify-between px-5 shadow-lg lg:w-3/4 lg:mx-auto"
+                class="w-full py-3 rounded-full flex items-center justify-between px-5 border-gray-500 border-2 lg:w-3/4 lg:mx-auto"
+                style="background-color: #f2f2f2;"
             >
                 <p class="text-gray-900">
                     <strong>Language</strong>: English, Persian (Vernacular)
@@ -176,7 +190,9 @@
             </div>
         </div>
 
-        <div class="text-center mt-5 px-5 sm:text-left lg:flex lg:justify-between items-start divide-x-4">
+        <div
+            class="text-center mt-5 px-5 sm:text-left lg:flex lg:justify-between items-start lg:divide-x-4"
+        >
             <div class="lg:w-1/2">
                 <p class="capitalize text-lg text-gray-900">
                     your feedbacks, suggestions, comments or every other
@@ -192,7 +208,7 @@
                         <input
                             type="text"
                             id="name"
-                            class="w-full sm:w-5/6 h-10 border-2 shadow-md bg-white mt-2 rounded-lg px-5 py-2 border-gray-500 focus:border-blue-600"
+                            class="w-full sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 bg-white mt-2 px-2 py-2 border-gray-500 focus:border-blue-600"
                             placeholder="Enter your name here"
                             autocomplete="off"
                         />
@@ -204,7 +220,7 @@
                         <input
                             type="text"
                             id="email"
-                            class="w-full sm:w-5/6 h-10 border-2 border-gray-500 shadow-md bg-white mt-2 rounded-lg px-5 py-2 focus:border-blue-600"
+                            class="w-full sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 border-gray-500 bg-white mt-2 px-2 py-2 focus:border-blue-600"
                             placeholder="Enter your email"
                             autocomplete="off"
                         />
@@ -216,10 +232,11 @@
                         <textarea
                             type="text"
                             id="message"
-                            class="w-full sm:w-5/6 resize-y  h-10 border-2 shadow-md bg-white mt-2 rounded-lg px-5 py-2 border-gray-500 focus:border-blue-600"
-                            placeholder="Enter your email"
+                            class="w-full sm:w-5/6 resize-y  h-10 border-2 border-t-0 border-l-0 bg-white mt-2 px-2 py-2 border-gray-500 focus:border-blue-600"
+                            placeholder="Enter your message (Maximum 300 characters)"
                             autocomplete="off"
                             style="min-height: 200px;max-height: 350px;"
+                            maxlength="300"
                         />
                     </div>
                     <div class="sm:flex sm:justify-end sm:w-full">
@@ -264,7 +281,7 @@
         ></div>
 
         <footer
-            class="text-center text-xs text-gray-900 mt-5 pb-5 -mx-8 capitalize"
+            class="text-center text-xs text-gray-900 mt-5 capitalize"
         >
             &copy; all rights of this website belong to nima shahbazi and any
             copying of it is presecuted.
