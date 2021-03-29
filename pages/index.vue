@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <main class="w-full md:w-auto text-center pt-5 sm:text-left">
+            <main class="w-full md:w-auto text-center pt-5 sm:text-left select-none">
                 <h1
                     class="text-gray-900 text-4xl font-black leading-8 lg:text-5xl lg:leading-10"
                 >
@@ -123,7 +123,7 @@
             <div
                 class="w-full py-5 flex items-cneter justify-center sm:justify-start relative"
             >
-                <button-samp text="see skills" class="mr-5 relative z-10" />
+                <button-samp text="<a href='#skills'>see skills</a>" class="mr-5 relative z-10" />
                 <button-samp text="hire me" class="relative z-10" />
                 <img
                     src="/svg/circle.svg"
@@ -136,11 +136,12 @@
 
         <h2
             class="capitalize text-2xl font-bold text-gray-900 text-center sm:text-left"
+            id="skills"
         >
             skills
         </h2>
         <div
-            class="w-full py-10 sm:py-0 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-auto justify-center sm:justify-start lg:justify-center"
+            class="w-full py-10 pt-5 sm:py-0 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-auto justify-center sm:justify-start lg:justify-center"
         >
             <div
                 v-for="skill in skills"

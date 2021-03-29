@@ -1,7 +1,5 @@
 <template>
-    <button :class="buttonClass" v-if="isButton">
-        {{ text }}
-    </button>
+    <button :class="buttonClass" v-if="isButton" v-html="text"></button>
     <div :class="titleClass" v-else>
         {{ text }}
     </div>
