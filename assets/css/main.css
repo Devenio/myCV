@@ -4,3 +4,7 @@
     outline: none;
     scroll-behavior: smooth;
 }
+*::selection {
+    background-color: #1a1a1a;
+    color: #e2e2e2;
+}

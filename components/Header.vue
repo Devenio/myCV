@@ -10,11 +10,13 @@
         >
             <li
                 class="flex flex-grow h-full justify-center items-center cursor-pointer hover:bg-gray-700"
+                @click="modalHandler('services', false)"
             >
                 Services
             </li>
             <li
                 class="flex flex-grow h-full justify-center items-center cursor-pointer hover:bg-gray-700"
+                @click="modalHandler('contact', false)"
             >
                 Contact
             </li>
@@ -63,9 +65,15 @@
                 @click="modalClose2 = !modalClose2"
             ></div>
             <div
-                class="w-11/12 min-h-64 bg-white absolute z-50 opacity-100 rounded"
+                class="w-11/12 md:w-1/2 min-h-64 bg-white absolute z-50 opacity-100 rounded"
             >
                 <ul class="w-full divide-y-2 divide-gray-400">
+                    <li
+                        class="transition capitalize duration-200 font-bold tracking-wider w-full py-5 text-center bg-gray-900 text-white"
+                        v-if="modalType === 'contact'"
+                    >
+                        you can contact me this way
+                    </li>
                     <li
                         class="transition capitalize duration-200 font-bold tracking-wider text-gray-900 w-full py-5 text-center hover:bg-blue-200"
                         v-for="item in modalType === 'services'
@@ -78,13 +86,19 @@
                         </span>
                         <div v-else>
                             <strong class="capitalize">
-                                {{ item.type }} 
+                                {{ item.type }}:
                             </strong>
-                            :
-                            <a class="lowercase" :href="item.link">
+                            <a class="lowercase underline" target="_blank" :href="item.link">
                                 {{ item.address }}
                             </a>
                         </div>
+                    </li>
+                    <li
+                        class="transition capitalize cursor-pointer duration-200 tracking-wider w-full py-5 text-center border-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white hover:underline"
+                        v-if="modalType === 'services'"
+                        @click="modalType = 'contact'"
+                    >
+                        click here to hire me in these services                    
                     </li>
                 </ul>
             </div>
@@ -126,13 +140,11 @@ export default {
         };
     },
     methods: {
-        modalHandler(modalType) {
-            this.modalClose = !this.modalClose;
+        modalHandler(modalType, isHamMenu) {
+            if(isHamMenu !== false) { this.modalClose = !this.modalClose };
             this.modalClose2 = !this.modalClose2;
             this.modalType = modalType;
         }
     }
 };
 </script>
-
-<style lang="scss" scoped></style>
