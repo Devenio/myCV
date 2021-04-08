@@ -1,6 +1,7 @@
 <template>
     <div
         class="h-16 container mx-auto px-5 flex justify-between items-center bg-gray-800"
+        id="navbar"
     >
         <div class="font-bold text-xl text-white select-none">
             Nima<span class="text-red-500">Shahbazi</span>

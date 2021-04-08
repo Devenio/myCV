@@ -3,10 +3,9 @@
         class="container mx-auto px-5 bg-white shadow-xl p-5 relative z-0 overflow-hidden"
     >
         <!-- Background pattern -->
-        <img
+        <div
             id="bg-img"
-            src="/images/bgpattern2.png"
-            class="absolute w-full h-full object-cover opacity-50 object-center z-0 -mt-5 -ml-5"
+            class="absolute w-full h-full object-cover opacity-50 object-center z-0 -mt-5 -ml-5 bg-gradient-to-br from-gray-400 via-gray-100 to-gray-400"
             style="z-index: -1;"
         />
         <!-- Render modal component -->
@@ -53,7 +52,12 @@
             <div
                 class="w-full md:w-auto p-5 sm:p-0 sm:flex sm:items-center sm:justify-end"
             >
-                <div class="relative">
+                <div
+                    id="profile-section"
+                    class="relative opacity-0 transition transform duration-1000 translate-x-32"
+                >
+                    <!-- class="relative z-10 shadow-2xl rounded-full w-64 h-64
+                    mx-auto object-cover object-top sm:mr-0" -->
                     <img
                         src="/images/profile.jpg"
                         alt="Picture"
@@ -78,7 +82,8 @@
 
             <!-- Main title part -->
             <main
-                class="w-full md:w-auto text-center pt-5 sm:text-left select-none"
+                id="main-section"
+                class="w-full md:w-auto text-center pt-5 sm:text-left select-none transform duration-1000 -translate-x-32 opacity-0"
             >
                 <h1
                     class="text-gray-900 text-4xl font-black leading-8 lg:text-5xl lg:leading-10"
@@ -92,9 +97,9 @@
                     a javaScript full stack developer
                 </h3>
 
-                <div @click="openModal = !openModal">
+                <span @click="toggleModal()">
                     <button-samp text="hire me" />
-                </div>
+                </span>
 
                 <div class="mt-5 leading-loose">
                     <h2 class="capitalize text-xl font-bold text-gray-900">
@@ -192,10 +197,9 @@
             <div
                 class="w-full py-5 flex items-cneter justify-center sm:justify-start relative"
             >
-                <button-samp
-                    text="<a href='#skills'>see skills</a>"
-                    class="mr-5 relative z-10"
-                />
+                <div @click="skillsScrollHandler()">
+                    <button-samp text="see skills" class="mr-8 relative z-10" />
+                </div>
                 <div @click="openModal = !openModal">
                     <button-samp text="hire me" />
                 </div>
@@ -208,6 +212,7 @@
             </div>
         </div>
 
+        <!-- Skills Section -->
         <h2
             class="capitalize text-2xl font-bold text-gray-900 text-center sm:text-left"
             id="skills"
@@ -456,8 +461,37 @@ export default {
                     link: "https://telegram.me/nima_524"
                 }
             ],
-            openModal: false
+            openModal: false,
+            skillsTopDistance: null
         };
+    },
+    mounted() {
+        // Reset windows scroll position
+        window.scrollTo(0, 0);
+
+        // Constant
+        const profileSection = document.querySelector("#profile-section");
+        const mainSection = document.querySelector("#main-section");
+        const skillsSection = document.querySelector("#skills");
+
+        // Apear animation setup
+        profileSection.classList.remove("opacity-0");
+        mainSection.classList.remove("opacity-0");
+
+        profileSection.classList.replace("translate-x-32", "-translate-x-0");
+        mainSection.classList.replace("-translate-x-32", "-translate-x-0");
+
+        // Skills scroll handler
+        this.skillsTopDistance = skillsSection.getBoundingClientRect().top;
+    },
+    methods: {
+        skillsScrollHandler() {
+            window.scrollTo(0, this.skillsTopDistance);
+            console.log(document.body.scrollTop);
+        },
+        toggleModal() {
+            this.openModal = !this.openModal
+        }
     }
 };
 </script>
