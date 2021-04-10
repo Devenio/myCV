@@ -106,13 +106,6 @@
                         work samples
                     </h2>
                     <a
-                        href="https://nimashahbazi.herokuapp.com"
-                        target="_blank"
-                        class="text-red-700 underline block text-sm lg:text-base"
-                    >
-                        https://nimashahbazi.herokuapp.com
-                    </a>
-                    <a
                         href="https://nima-chatapp.herokuapp.com"
                         target="_blank"
                         class="text-red-700 underline block text-sm lg:text-base"
@@ -220,12 +213,13 @@
             skills
         </h2>
         <div
-            class="w-full py-10 pt-5 sm:py-0 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-auto justify-center sm:justify-start lg:justify-center"
+            id="skill-card"
+            class="w-full py-10 pt-5 sm:py-0 sm:mt-0 text-center flex flex-wrap md:flex-no-wrap md:overflow-x-auto justify-center sm:justify-start lg:justify-center transition duration-500 opacity-0"
         >
             <div
                 v-for="skill in skills"
                 :key="skill.id"
-                class="mx-5 mb-16 sm:mb-0 sm:mt-5 sm:flex sm:flex-col sm:items-start "
+                class="mx-5 mb-16 sm:mb-0 sm:mt-5 sm:flex sm:flex-col sm:items-start"
             >
                 <button-samp
                     :text="skill.title"
@@ -289,7 +283,7 @@
                         <input
                             id="name"
                             type="text"
-                            class="w-full sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 bg-white mt-2 px-2 py-2 border-gray-500 focus:border-blue-600 focus:placeholder-blue-600"
+                            class="w-full bg-transparent sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 mt-2 px-2 py-2 border-gray-500 focus:border-blue-600 focus:placeholder-blue-600"
                             placeholder="Enter your name here"
                             autocomplete="off"
                         />
@@ -301,7 +295,7 @@
                         <input
                             id="email"
                             type="text"
-                            class="w-full sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 border-gray-500 bg-white mt-2 px-2 py-2 focus:border-blue-600 focus:placeholder-blue-600"
+                            class="w-full sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 border-gray-500 bg-transparent mt-2 px-2 py-2 focus:border-blue-600 focus:placeholder-blue-600"
                             placeholder="Enter your email"
                             autocomplete="off"
                         />
@@ -313,7 +307,7 @@
                         <textarea
                             id="message"
                             type="text"
-                            class="w-full sm:w-5/6 resize-y  h-10 border-2 border-t-0 border-l-0 bg-white mt-2 px-2 py-2 border-gray-500 focus:border-blue-600 focus:placeholder-blue-600"
+                            class="w-full sm:w-5/6 resize-y  h-10 border-2 border-t-0 border-l-0 bg-transparent mt-2 px-2 py-2 border-gray-500 focus:border-blue-600 focus:placeholder-blue-600"
                             placeholder="Enter your message (Maximum 300 characters)"
                             autocomplete="off"
                             style="min-height: 200px;max-height: 350px;"
@@ -461,18 +455,13 @@ export default {
                     link: "https://telegram.me/nima_524"
                 }
             ],
-            openModal: false,
-            skillsTopDistance: null
+            openModal: false
         };
     },
     mounted() {
-        // Reset windows scroll position
-        window.scrollTo(0, 0);
-
         // Constant
         const profileSection = document.querySelector("#profile-section");
         const mainSection = document.querySelector("#main-section");
-        const skillsSection = document.querySelector("#skills");
 
         // Apear animation setup
         profileSection.classList.remove("opacity-0");
@@ -482,15 +471,45 @@ export default {
         mainSection.classList.replace("-translate-x-32", "-translate-x-0");
 
         // Skills scroll handler
-        this.skillsTopDistance = skillsSection.getBoundingClientRect().top;
+        if (!window.localStorage.getItem("isSet")) {
+            this.setOffsetTop();
+            window.localStorage.setItem("isSet", true);
+        }
+
+        // Window scroll event handler
+        const skillsSection = document.querySelector("#skills");
+
+        document.addEventListener("scroll", () => {
+            skillsSection.getBoundingClientRect().top <= 300
+                ? this.skillCardToggleAnimation("visible")
+                : this.skillCardToggleAnimation("hidden");
+        });
     },
     methods: {
         skillsScrollHandler() {
-            window.scrollTo(0, this.skillsTopDistance);
+            window.scrollTo(
+                0,
+                window.localStorage.getItem("skillsTopDistance")
+            );
             console.log(document.body.scrollTop);
         },
         toggleModal() {
-            this.openModal = !this.openModal
+            this.openModal = !this.openModal;
+        },
+        setOffsetTop() {
+            const skillsSection = document.querySelector("#skills");
+
+            window.localStorage.setItem(
+                "skillsTopDistance",
+                skillsSection.getBoundingClientRect().top
+            );
+        },
+        skillCardToggleAnimation(status) {
+            const skillCard = document.querySelector("#skill-card");
+
+            status === "visible"
+                ? skillCard.classList.remove("opacity-0")
+                : skillCard.classList.add("opacity-0");
         }
     }
 };

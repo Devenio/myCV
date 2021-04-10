@@ -10,7 +10,7 @@ export default {
     data() {
         return {
             buttonClass:
-                "capitalize outline-none border-2 text-red-600 bg-white transition duration-300 border-red-600 py-1 px-6 mt-5 hover:bg-red-600 hover:text-white relative",
+                "capitalize outline-none border-2 text-red-600 bg-gray-100 transition duration-300 border-red-600 py-1 px-6 mt-5 hover:bg-red-600 hover:text-white relative",
             titleClass:
                 "capitalize text-white outline-none border-2 border-red-600 py-1 px-6"
         };
