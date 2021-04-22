@@ -56,8 +56,6 @@
                     id="profile-section"
                     class="relative opacity-0 transition transform duration-1000 translate-x-32"
                 >
-                    <!-- class="relative z-10 shadow-2xl rounded-full w-64 h-64
-                    mx-auto object-cover object-top sm:mr-0" -->
                     <img
                         src="/images/profile.jpg"
                         alt="Picture"
@@ -81,12 +79,15 @@
             </div>
 
             <!-- Main title part -->
-            <main
+            <!-- <main
                 id="main-section"
                 class="w-full md:w-auto text-center pt-5 sm:text-left select-none transform duration-1000 -translate-x-32 opacity-0"
+            > -->
+            <main
+                class="w-full md:w-auto text-center pt-5 sm:text-left select-none"
             >
                 <h1
-                    class="text-gray-900 text-4xl font-black leading-8 lg:text-5xl lg:leading-10"
+                    class="main-section text-gray-900 text-4xl font-black leading-8 lg:text-5xl lg:leading-10 transform duration-1000 -translate-x-32 opacity-0"
                 >
                     HY! I AM <br />
                     NIMA <span class="text-red-600">SHAHBAZI</span>
@@ -286,6 +287,7 @@
                             class="w-full bg-transparent sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 mt-2 px-2 py-2 border-gray-500 focus:border-blue-600 focus:placeholder-blue-600"
                             placeholder="Enter your name here"
                             autocomplete="off"
+                            v-model="feedback.name"
                         />
                     </div>
                     <div
@@ -298,6 +300,7 @@
                             class="w-full sm:w-5/6 h-10 border-2 border-t-0 border-r-0 border-l-0 border-gray-500 bg-transparent mt-2 px-2 py-2 focus:border-blue-600 focus:placeholder-blue-600"
                             placeholder="Enter your email"
                             autocomplete="off"
+                            v-model="feedback.email"
                         />
                     </div>
                     <div
@@ -312,11 +315,14 @@
                             autocomplete="off"
                             style="min-height: 200px;max-height: 350px;"
                             maxlength="300"
+                            v-model="feedback.message"
                         />
                     </div>
                     <div class="sm:flex sm:justify-end sm:w-full">
                         <div class="sm:w-5/6 sm:flex sm:justify-start">
-                            <button-samp text="send message" />
+                            <div @click="sendFeedback()">
+                                <button-samp text="send message" />
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -365,6 +371,11 @@
             &copy; all rights of this website belong to nima shahbazi and any
             copying of it is presecuted.
         </footer>
+
+        <!-- Form Error Box -->
+        <div class="w-[300px] h-[150px] bg-red-500">
+
+        </div>
     </div>
 </template>
 
@@ -455,20 +466,27 @@ export default {
                     link: "https://telegram.me/nima_524"
                 }
             ],
-            openModal: false
+            openModal: false,
+            feedback: {
+                message: "",
+                email: "",
+                name: ""
+            }
         };
     },
     mounted() {
         // Constant
         const profileSection = document.querySelector("#profile-section");
-        const mainSection = document.querySelector("#main-section");
+        const mainSection = document.querySelectorAll(".main-section");
 
         // Apear animation setup
         profileSection.classList.remove("opacity-0");
-        mainSection.classList.remove("opacity-0");
-
         profileSection.classList.replace("translate-x-32", "-translate-x-0");
-        mainSection.classList.replace("-translate-x-32", "-translate-x-0");
+
+        mainSection.forEach(item => {
+            item.classList.remove("opacity-0");
+            item.classList.replace("-translate-x-32", "-translate-x-0");
+        });
 
         // Skills scroll handler
         if (!window.localStorage.getItem("isSet")) {
@@ -480,7 +498,7 @@ export default {
         const skillsSection = document.querySelector("#skills");
 
         document.addEventListener("scroll", () => {
-            skillsSection.getBoundingClientRect().top <= 300
+            skillsSection.getBoundingClientRect().top <= 450
                 ? this.skillCardToggleAnimation("visible")
                 : this.skillCardToggleAnimation("hidden");
         });
@@ -510,6 +528,53 @@ export default {
             status === "visible"
                 ? skillCard.classList.remove("opacity-0")
                 : skillCard.classList.add("opacity-0");
+        },
+        sendFeedback() {
+            const name = document.querySelector("#name");
+            const email = document.querySelector("#email");
+            const message = document.querySelector("#message");
+
+            if (this.feedback.name === "") {
+                this.toggleInputStatus(name, true);
+            } else {
+                this.toggleInputStatus(name, false);
+            }
+
+            if (this.feedback.email === "") {
+                this.toggleInputStatus(email, true);
+            } else {
+                this.toggleInputStatus(email, false);
+            }
+
+            if (this.feedback.message === "") {
+                this.toggleInputStatus(message, true);
+            } else {
+                this.toggleInputStatus(message, false);
+            }
+
+            this.$axios
+                .post("/api/messages", this.feedback)
+                .then(res => {
+                    if (res.data.errorMessage) {
+                        this.toggleInputStatus(email, true);
+                    }
+                })
+                .catch(err => console.log("axios error: ", err));
+        },
+        toggleInputStatus(el, isError) {
+            if (isError) {
+                el.classList.add("border-red-500", "placeholder-red-500");
+                el.classList.remove(
+                    "focus:border-blue-600",
+                    "focus:placeholder-blue-600"
+                );
+            } else {
+                el.classList.remove("border-red-500", "placeholder-red-500");
+                el.classList.add(
+                    "focus:border-blue-600",
+                    "focus:placeholder-blue-600"
+                );
+            }
         }
     }
 };
