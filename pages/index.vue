@@ -278,6 +278,7 @@
                 <form
                     @click.prevent=""
                     class="text-center mt-5 w-full text-gray-900"
+                    id="feedbackForm"
                 >
                     <div class="sm:flex sm:items-center sm:justify-between">
                         <label for="name">Name</label>
@@ -373,8 +374,30 @@
         </footer>
 
         <!-- Form Error Box -->
-        <div class="w-[300px] h-[150px] bg-red-500">
+        <div
+            class="fixed bottom-10 bg-white p-5 rounded-lg -left-full mx-5 right-10 shadow-xl z-50 font-bold transition-all duration-500"
+            :class="
+                wasSuccessful
+                    ? 'border-green-700 text-green-700'
+                    : 'text-red-700 border-2 border-red-700'
+            "
+            style="bottom: 15px;"
+            id="errorModal"
+        >
+            <fa :icon="['fas', 'check']" v-show="wasSuccessful"></fa>
+            <fa
+                :icon="['fas', 'exclamation-triangle']"
+                v-show="!wasSuccessful"
+            ></fa>
 
+            <span v-show="wasSuccessful">
+                Congratulations boy. <br />
+                Message sent successfully. Thank you for your message
+            </span>
+            <span v-show="!wasSuccessful">
+                Hey men! Pay attention. <br />
+                {{ msg }}
+            </span>
         </div>
     </div>
 </template>
@@ -471,7 +494,9 @@ export default {
                 message: "",
                 email: "",
                 name: ""
-            }
+            },
+            msg: "",
+            wasSuccessful: false
         };
     },
     mounted() {
@@ -530,51 +555,32 @@ export default {
                 : skillCard.classList.add("opacity-0");
         },
         sendFeedback() {
-            const name = document.querySelector("#name");
-            const email = document.querySelector("#email");
-            const message = document.querySelector("#message");
-
-            if (this.feedback.name === "") {
-                this.toggleInputStatus(name, true);
-            } else {
-                this.toggleInputStatus(name, false);
-            }
-
-            if (this.feedback.email === "") {
-                this.toggleInputStatus(email, true);
-            } else {
-                this.toggleInputStatus(email, false);
-            }
-
-            if (this.feedback.message === "") {
-                this.toggleInputStatus(message, true);
-            } else {
-                this.toggleInputStatus(message, false);
-            }
-
             this.$axios
                 .post("/api/messages", this.feedback)
                 .then(res => {
                     if (res.data.errorMessage) {
-                        this.toggleInputStatus(email, true);
+                        this.wasSuccessful = false;
+                        this.showMessageBox(res.data.errorMessage);
+                        return;
                     }
+                    this.wasSuccessful = true;
+                    this.showMessageBox();
                 })
                 .catch(err => console.log("axios error: ", err));
         },
-        toggleInputStatus(el, isError) {
-            if (isError) {
-                el.classList.add("border-red-500", "placeholder-red-500");
-                el.classList.remove(
-                    "focus:border-blue-600",
-                    "focus:placeholder-blue-600"
-                );
-            } else {
-                el.classList.remove("border-red-500", "placeholder-red-500");
-                el.classList.add(
-                    "focus:border-blue-600",
-                    "focus:placeholder-blue-600"
-                );
-            }
+        showMessageBox(msg) {
+            const errorModal = document.querySelector("#errorModal");
+            let timer = 3000;
+
+            errorModal.classList.add("left-0", "-left-full");
+            clearTimeout(myTimer);
+
+            msg ? (this.msg = msg) : (timer = 7000);
+            errorModal.classList.replace("-left-full", "left-0");
+
+            let myTimer = setTimeout(() => {
+                errorModal.classList.add("left-0", "-left-full");
+            }, timer);
         }
     }
 };
@@ -602,5 +608,8 @@ export default {
         bottom: 0;
         left: 10%;
     }
+}
+.-left-full {
+    left: -100%;
 }
 </style>
