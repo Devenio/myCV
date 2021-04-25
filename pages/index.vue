@@ -114,7 +114,7 @@
                         https://nima-chatapp.herokuapp.com
                     </a>
                     <a
-                        href="https://nima-musicplayer.herokuapp.com"
+                        href="https://nima-musicapp.herokuapp.com"
                         target="_blank"
                         class="text-red-700 underline block text-sm lg:text-base"
                     >
