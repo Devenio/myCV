@@ -118,7 +118,14 @@
                         target="_blank"
                         class="text-red-700 underline block text-sm lg:text-base"
                     >
-                        https://nima-musicplayer.herokuapp.com
+                        https://nima-musicapp.herokuapp.com
+                    </a>
+                    <a
+                        href="https://superz.ir/"
+                        target="_blank"
+                        class="text-red-700 underline block text-sm lg:text-base"
+                    >
+                        https://superz.ir/ <small>(as a frontend developer)</small>
                     </a>
                 </div>
             </main>
