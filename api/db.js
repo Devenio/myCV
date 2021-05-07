@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const dbPath = process.env.URI || "mongodb://localhost/MyCv";
+const dbPath = "mongodb://localhost/mydb";
 
 mongoose
     .connect(dbPath, {

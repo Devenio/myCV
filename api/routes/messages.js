@@ -9,7 +9,7 @@ router.post("/", (req, res) => {
     if (messageValidator(data).error == undefined) {
         const message = new Message(data);
         message
-            .save()
+            .insertOne()
             .then(ex => {
                 res.send(ex);
             })

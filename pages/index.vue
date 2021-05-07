@@ -125,7 +125,8 @@
                         target="_blank"
                         class="text-red-700 underline block text-sm lg:text-base"
                     >
-                        https://superz.ir/ <small>(as a frontend developer)</small>
+                        https://superz.ir/
+                        <small>(as a frontend developer)</small>
                     </a>
                 </div>
             </main>
@@ -563,15 +564,15 @@ export default {
         },
         sendFeedback() {
             this.$axios
-                .post("/api/messages", this.feedback)
+                .$post("/api/messages", this.feedback)
                 .then(res => {
                     if (res.data.errorMessage) {
                         this.wasSuccessful = false;
                         this.showMessageBox(res.data.errorMessage);
-                        return;
+                    } else {
+                        this.wasSuccessful = true;
+                        this.showMessageBox();
                     }
-                    this.wasSuccessful = true;
-                    this.showMessageBox();
                 })
                 .catch(err => console.log("axios error: ", err));
         },
